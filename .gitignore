@@ -1,0 +1,6 @@
+target/
+data/
+
+.vagrant/
+.idea/
+*.iml

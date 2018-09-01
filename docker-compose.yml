@@ -1,0 +1,20 @@
+version: '3'
+services:
+  openvidu:
+    image: openvidu/openvidu-server-kms:2.4.0
+    network_mode: host
+    ports:
+      - '4443:4443'
+    environment:
+      MY_UID: ${MY_UID}
+      openvidu.secret: MY_STRONG_SECRET
+      openvidu.recording: 'true'
+      openvidu.recording.path: /opt/openvidu/recordings
+      openvidu.recording.public-access: 'true'
+      server.ssl.key-store: /var/openvidu-server-kms/keystore/keystore.jks
+      server.ssl.key-store-password: password
+      server.ssl.key-alias: selfsigned
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data/keystore/keystore.jks:/var/openvidu-server-kms/keystore/keystore.jks:ro
+      - /opt/openvidu/recordings:/opt/openvidu/recordings
